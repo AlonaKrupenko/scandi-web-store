@@ -9,7 +9,7 @@ class Header extends React.Component {
     return (
       <div className="nav">
         <NavTabs />
-        <Logo />
+        <Logo className="logo-img" />
         <Cart />
       </div>
     );

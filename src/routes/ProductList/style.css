@@ -1,0 +1,17 @@
+.product-list-container {
+  margin-top: 80px;
+}
+
+.product-list-title {
+  margin: 0 0 103px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 42px;
+  line-height: 160%;
+}
+.product-list-cards-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(355px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(355px, 1fr));
+  grid-gap: 103px 40px;
+}
