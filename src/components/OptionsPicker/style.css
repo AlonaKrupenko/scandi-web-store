@@ -1,0 +1,57 @@
+.option-name {
+  margin: 0 0 8px 0;
+  font-family: "Roboto Condensed";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+}
+.options-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.option-item {
+  margin-right: 12px;
+}
+.option-item:last-child {
+  margin-right: 0;
+}
+.option-item-selected {
+  background-color: #1d1f22;
+  color: white;
+}
+.list-item-block {
+  padding: 0 8px;
+  cursor: pointer;
+  border: 1px solid #1d1f22;
+  min-width: 64px;
+  height: 45px;
+  position: relative;
+}
+.list-item-text {
+  margin: 0;
+  font-family: "Source Sans Pro";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 45px;
+  text-align: center;
+}
+
+.option-item.color {
+  margin-right: 8px;
+  border: 1px solid white;
+}
+.option-item.color:last-child {
+  margin-right: 0;
+}
+.option-item-selected.color {
+  border: 1px solid #5ece7b;
+}
+.list-item-block.color {
+  padding: 0;
+  border: 1px solid transparent;
+  min-width: unset;
+  height: 32px;
+  width: 32px;
+}
