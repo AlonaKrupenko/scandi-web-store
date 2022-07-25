@@ -1,12 +1,8 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-// import ProductCard from "./components/ProductCard/ProductCard";
 // import ProductList from "./routes/ProductList/ProductList";
-// import ProductDescription from "./routes/ProductDescription/ProductDescription";
-
-import OptionsPicker from "./components/OptionsPicker/OptionsPicker";
-import ColorsOptionsPicker from "./components/OptionsPicker/ColorsOptionsPicker";
+import ProductDescription from "./routes/ProductDescription/ProductDescription";
 
 // const data = [
 //   {
@@ -57,39 +53,12 @@ const colors = [
 ];
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedValue: "",
-      selectedColorValue: "",
-    };
-  }
-
-  addValue = (value) => {
-    this.setState({ selectedValue: value });
-  };
-  addColorValue = (value) => {
-    this.setState({ selectedColorValue: value });
-  };
-
   render() {
     return (
       <div className="App">
         <Header />
         {/* <ProductList data={data} /> */}
-        {/* <ProductDescription /> */}
-        <OptionsPicker
-          value={this.state.selectedValue}
-          title="SIZE"
-          options={options}
-          onSelect={this.addValue}
-        />
-        <ColorsOptionsPicker
-          value={this.state.selectedColorValue}
-          title="COLOR"
-          options={colors}
-          onSelect={this.addColorValue}
-        />
+        <ProductDescription colors={colors} options={options} />
       </div>
     );
   }

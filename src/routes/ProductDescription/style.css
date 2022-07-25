@@ -1,0 +1,46 @@
+.description-block {
+  display: flex;
+  justify-content: space-between;
+}
+.img-block {
+  display: flex;
+  margin-right: 100px;
+}
+.preview-block {
+  display: flex;
+  flex-direction: column;
+}
+.preview-img {
+  margin: 0 40px 40px 0;
+  max-width: 80px;
+}
+.main-img {
+  max-width: 610px;
+}
+
+.description-content {
+  max-width: 292px;
+}
+
+.price-heading {
+  font-family: "Roboto Condensed";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 18px;
+  margin: 0;
+}
+
+.btn-add {
+  padding: 16px 93px;
+  width: 100%;
+  border: none;
+  background-color: #5ece7b;
+  color: #ffffff;
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+}
+.text {
+  text-align: justify;
+}
