@@ -1,11 +1,9 @@
 import React from "react";
 import "./App.css";
 
-import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-import PropTypes from "prop-types";
-import { withRouter } from "react-router";
 import Header from "./components/Header/Header";
 import ProductList from "./routes/ProductList/ProductList";
 import ProductDescription from "./routes/ProductDescription/ProductDescription";
@@ -88,22 +86,29 @@ const fullData = {
   brand: "",
 };
 
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "http://localhost:4000",
+});
+
 class App extends React.Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Header />
-          <Switch>
-            <Route exact path="/">
-              <ProductList data={data} />
-            </Route>
-            <Route path="/description">
-              <ProductDescription colors={colors} options={options} />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <ApolloProvider client={client}>
+        <Router>
+          <div className="App">
+            <Header />
+            <Switch>
+              <Route exact path="/">
+                <ProductList list={data} />
+              </Route>
+              <Route path="/description">
+                <ProductDescription colors={colors} options={options} />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </ApolloProvider>
     );
   }
 }

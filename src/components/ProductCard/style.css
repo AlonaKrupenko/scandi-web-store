@@ -6,7 +6,9 @@
 .product-card:hover {
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
-
+.product-link {
+  text-decoration: none;
+}
 .img-wraper {
   position: relative;
   margin-bottom: 24px;
@@ -44,6 +46,7 @@
   line-height: 160%;
 }
 .product-price {
+  color: #1d1f22;
   margin: 0;
   font-weight: 500;
   font-size: 18px;

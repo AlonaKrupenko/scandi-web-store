@@ -23,7 +23,7 @@ class ProductCard extends React.Component {
     });
 
     return (
-      <Link to="/description">
+      <Link to="/description" className="product-link">
         <div className="product-card">
           <div className="img-wraper">
             <img className="product-img" src={this.props.img} alt="pic" />
@@ -33,8 +33,10 @@ class ProductCard extends React.Component {
           </div>
           <AddToCart className={addToCartClasses} />
           <div className="product-info">
-            <h3 className={cardTitleClasses}>Apollo Running Short</h3>
-            <p className={cardPriceClasses}>${this.props.price}</p>
+            <h3 className={cardTitleClasses}>{this.props.name}</h3>
+            <p className={cardPriceClasses}>
+              {this.props.priceSymb + this.props.price}
+            </p>
           </div>
         </div>
       </Link>
