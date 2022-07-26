@@ -38,11 +38,13 @@ class ProductDescription extends React.Component {
               alt=""
             />
           </div>
-          <img
-            className="main-img"
-            src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
-            alt=""
-          />
+          <div className="img-wrapper">
+            <img
+              className="main-img"
+              src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
+              alt=""
+            />
+          </div>
         </div>
         <div className="description-content">
           <h2 className="heading">Apollo</h2>

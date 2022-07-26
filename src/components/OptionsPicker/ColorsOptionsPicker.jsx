@@ -9,7 +9,7 @@ class ColorsOptionsPicker extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="option-block">
         <p className="option-name color">{this.props.title}:</p>
         <ul className="options-list color">
           {this.props.options.map((el) => {
@@ -31,7 +31,7 @@ class ColorsOptionsPicker extends React.Component {
             );
           })}
         </ul>
-      </>
+      </div>
     );
   }
 }

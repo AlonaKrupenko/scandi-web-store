@@ -1,3 +1,6 @@
+.option-block {
+  margin-bottom: 24px;
+}
 .option-name {
   margin: 0 0 8px 0;
   font-family: "Roboto Condensed";

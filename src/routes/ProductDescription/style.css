@@ -1,4 +1,5 @@
 .description-block {
+  margin-top: 82px;
   display: flex;
   justify-content: space-between;
 }
@@ -22,16 +23,38 @@
   max-width: 292px;
 }
 
+.heading {
+  margin: 0 0 16px;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1d1f22;
+}
+.name {
+  margin: 0 0 43px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+}
+
 .price-heading {
+  margin: 0 0 10px;
   font-family: "Roboto Condensed";
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  margin: 0;
+  color: #1d1f22;
+}
+.price {
+  margin: 0 0 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
 }
 
 .btn-add {
-  padding: 16px 93px;
+  padding: 16px 32px;
   width: 100%;
   border: none;
   background-color: #5ece7b;
@@ -42,5 +65,9 @@
   line-height: 120%;
 }
 .text {
+  font-family: "Roboto";
   text-align: justify;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
 }
