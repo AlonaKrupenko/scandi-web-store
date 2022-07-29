@@ -1,16 +1,43 @@
 import React from "react";
 import "./style.css";
+import cn from "classnames";
+import { graphql } from "@apollo/client/react/hoc";
+import { GET_CATEGORY_NAMES } from "../../../graphQL/Queries";
+import { withRouter } from "react-router";
 
 class NavTabs extends React.Component {
+  onCategoryClick = (category) => () => {
+    this.props.history.push(category);
+    console.log(this.props.history);
+  };
+
   render() {
+    const categories = this.props.data?.categories;
+    const currentCategory = this.props.location?.pathname.split("/")[1];
+
     return (
       <ul className="nav-list">
-        <li className="nav-link">WOMEN</li>
-        <li className="nav-link">MEN</li>
-        <li className="nav-link">KIDS</li>
+        {categories?.map((el) => {
+          const activeTab = cn("nav-link", {
+            active: currentCategory === el.name,
+          });
+          return (
+            <li
+              className={activeTab}
+              key={el.name}
+              onClick={this.onCategoryClick(el.name)}
+            >
+              {el.name.toUpperCase()}
+            </li>
+          );
+        })}
       </ul>
     );
   }
 }
 
-export default NavTabs;
+const NavWithApollo = graphql(GET_CATEGORY_NAMES)(NavTabs);
+
+const NavWithApolloWithRouter = withRouter(NavWithApollo);
+
+export default NavWithApolloWithRouter;

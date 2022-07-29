@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import { ReactComponent as AddToCart } from "../../assets/add_to_cart.svg";
 import cn from "classnames";
-import { Link } from "react-router-dom";
 
 class ProductCard extends React.Component {
   render() {
@@ -21,25 +20,22 @@ class ProductCard extends React.Component {
     const addToCartClasses = cn("add-to-cart-btn", {
       "non-visible": !this.props.inStock,
     });
-
     return (
-      <Link to="/description" className="product-link">
-        <div className="product-card">
-          <div className="img-wraper">
-            <img className="product-img" src={this.props.img} alt="pic" />
-            <div className={wrapperClasses}>
-              <p className={wrapperTextClasses}>OUT OF STOCK</p>
-            </div>
-          </div>
-          <AddToCart className={addToCartClasses} />
-          <div className="product-info">
-            <h3 className={cardTitleClasses}>{this.props.name}</h3>
-            <p className={cardPriceClasses}>
-              {this.props.priceSymb + this.props.price}
-            </p>
+      <div className="product-card">
+        <div className="img-wraper">
+          <img className="product-img" src={this.props.img} alt="pic" />
+          <div className={wrapperClasses}>
+            <p className={wrapperTextClasses}>OUT OF STOCK</p>
           </div>
         </div>
-      </Link>
+        <AddToCart className={addToCartClasses} />
+        <div className="product-info">
+          <h3 className={cardTitleClasses}>{this.props.name}</h3>
+          <p className={cardPriceClasses}>
+            {this.props.priceSymb + this.props.price}
+          </p>
+        </div>
+      </div>
     );
   }
 }

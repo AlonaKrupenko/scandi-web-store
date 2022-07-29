@@ -1,7 +1,11 @@
 import React from "react";
 import "./style.css";
+import cn from "classnames";
 import OptionsPicker from "../../components/OptionsPicker/OptionsPicker";
 import ColorsOptionsPicker from "../../components/OptionsPicker/ColorsOptionsPicker";
+import { graphql } from "@apollo/client/react/hoc";
+import { GET_PRODUCT } from "../../graphQL/Queries";
+import { withRouter } from "react-router-dom";
 
 class ProductDescription extends React.Component {
   constructor(props) {
@@ -17,62 +21,77 @@ class ProductDescription extends React.Component {
   addColorValue = (value) => {
     this.setState({ selectedColorValue: value });
   };
+
   render() {
+    const productData = this.props.data?.product;
+
+    const btnClasses = cn("btn-add", {
+      "not-available": !productData?.inStock,
+    });
+
     return (
       <div className="description-block">
         <div className="img-block">
           <div className="preview-block">
-            <img
-              className="preview-img"
-              src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
-              alt=""
-            />
-            <img
-              className="preview-img"
-              src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
-              alt=""
-            />
-            <img
-              className="preview-img"
-              src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
-              alt=""
-            />
+            {productData?.gallery.map((el, index) => {
+              return (
+                <img className="preview-img" src={el} alt="" key={index} />
+              );
+            })}
           </div>
           <div className="img-wrapper">
-            <img
-              className="main-img"
-              src="https://images-na.ssl-images-amazon.com/images/I/61qbqFcvoNL._SL1500_.jpg"
-              alt=""
-            />
+            <img className="main-img" src={productData?.gallery[0]} alt="" />
           </div>
         </div>
         <div className="description-content">
-          <h2 className="heading">Apollo</h2>
-          <p className="name">Running Shorts</p>
-          <OptionsPicker
-            value={this.state.selectedValue}
-            title="SIZE"
-            options={this.props.options}
-            onSelect={this.addValue}
-          />
-          <ColorsOptionsPicker
-            value={this.state.selectedColorValue}
-            title="COLOR"
-            options={this.props.colors}
-            onSelect={this.addColorValue}
-          />
+          <h2 className="heading">{productData?.brand}</h2>
+          <p className="name">{productData?.name}</p>
+          <div>
+            {productData?.attributes.map((el) => {
+              return el.id !== "Color" ? (
+                <OptionsPicker
+                  key={el.id}
+                  value={this.state.selectedValue}
+                  title={el.id}
+                  options={el.items}
+                  onSelect={this.addValue}
+                />
+              ) : (
+                <ColorsOptionsPicker
+                  key={el.id}
+                  value={this.state.selectedColorValue}
+                  title={el.id}
+                  options={el.items}
+                  onSelect={this.addColorValue}
+                />
+              );
+            })}
+          </div>
           <p className="price-heading">PRICE</p>
-          <p className="price">$50</p>
-          <button className="btn-add">ADD TO CART</button>
-          <p className="text">
-            Find stunning women's cocktail dresses and party dresses. Stand out
-            in lace and metallic cocktail dresses and party dresses from all
-            your favorite brands.
+          <p className="price">
+            {productData?.prices[0].currency.symbol +
+              productData?.prices[0].amount}
           </p>
+          <button className={btnClasses}>ADD TO CART</button>
+          <p className="text">{productData?.description}</p>
         </div>
       </div>
     );
   }
 }
 
-export default ProductDescription;
+const ProductDescriptionWithApollo = graphql(GET_PRODUCT, {
+  options: (props) => {
+    return {
+      variables: {
+        productId: props.match.params.id,
+      },
+    };
+  },
+})(ProductDescription);
+
+const ProductDescriptionWithApolloWithRouter = withRouter(
+  ProductDescriptionWithApollo
+);
+
+export default ProductDescriptionWithApolloWithRouter;

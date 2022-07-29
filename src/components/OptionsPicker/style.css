@@ -43,7 +43,7 @@
 
 .option-item.color {
   margin-right: 8px;
-  border: 1px solid transparent;
+  border: 1px solid #1d1f22;
 }
 .option-item.color:last-child {
   margin-right: 0;

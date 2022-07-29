@@ -3,25 +3,32 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import "./style.css";
 import { graphql } from "@apollo/client/react/hoc";
 import { GET_CATEGORY } from "../../graphQL/Queries";
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 class ProductList extends React.Component {
   render() {
     const allProducts = this.props.data.category?.products;
-    console.log(allProducts);
     return (
       <div className="product-list-container">
-        <h1 className="product-list-title">All</h1>
+        <h1 className="product-list-title">
+          {this.props.data.category?.name.toUpperCase()}
+        </h1>
         <div className="product-list-cards-block">
           {allProducts?.map((el) => {
             return (
-              <ProductCard
+              <Link
+                to={`/${this.props.match.params.name}/${el.id}`}
                 key={el.id}
-                img={el.gallery[0]}
-                name={el.name}
-                priceSymb={el.prices[0].currency.symbol}
-                price={el.prices[0].amount}
-                inStock={el.inStock}
-              />
+              >
+                <ProductCard
+                  img={el.gallery[0]}
+                  name={el.name}
+                  priceSymb={el.prices[0].currency.symbol}
+                  price={el.prices[0].amount}
+                  inStock={el.inStock}
+                />
+              </Link>
             );
           })}
         </div>
@@ -30,6 +37,16 @@ class ProductList extends React.Component {
   }
 }
 
-const ListWithApollo = graphql(GET_CATEGORY)(ProductList);
+const ProductListWithApollo = graphql(GET_CATEGORY, {
+  options: (props) => {
+    return {
+      variables: {
+        categoryName: props.match.params.name,
+      },
+    };
+  },
+})(ProductList);
 
-export default ListWithApollo;
+const ProductListWithApolloWithRouter = withRouter(ProductListWithApollo);
+
+export default ProductListWithApolloWithRouter;
