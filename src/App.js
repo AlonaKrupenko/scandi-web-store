@@ -7,6 +7,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Header from "./components/Header/Header";
 import ProductListWithApolloWithRouter from "./routes/ProductList/ProductList";
 import ProductDescriptionWithApolloWithRouter from "./routes/ProductDescription/ProductDescription";
+// import QuantitySelector from "./components/QuantitySelector/QuantitySelector";
 
 // const fullData = {
 //   id: "",
@@ -38,18 +39,25 @@ import ProductDescriptionWithApolloWithRouter from "./routes/ProductDescription/
 //   brand: "",
 // };
 
+// const cartSize = "small";
+const itemValue = 12;
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: "http://localhost:4000",
 });
 
 class App extends React.Component {
+  changeValue = (value) => {
+    console.log(value);
+  };
+
   render() {
     return (
       <ApolloProvider client={client}>
         <Router>
           <div className="App">
-            <Header />
+            <Header value={itemValue} />
             <Switch>
               <Route exact path="/:name">
                 <ProductListWithApolloWithRouter />
@@ -60,6 +68,11 @@ class App extends React.Component {
             </Switch>
           </div>
         </Router>
+        {/* <QuantitySelector
+          size={cartSize}
+          value={itemValue}
+          onChange={this.changeValue}
+        /> */}
       </ApolloProvider>
     );
   }

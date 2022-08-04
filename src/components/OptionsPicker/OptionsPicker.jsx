@@ -8,15 +8,28 @@ class OptionsPicker extends React.Component {
   };
 
   render() {
+    const optionNameStyle = cn("option-name", {
+      "cart-popup": this.props.className === "cart-popup",
+    });
+    const optionBlockStyle = cn("option-block", {
+      "cart-popup": this.props.className === "cart-popup",
+    });
     return (
-      <div className="option-block">
-        <p className="option-name">{this.props.title}:</p>
+      <div className={optionBlockStyle}>
+        <p className={optionNameStyle}>{this.props.title}:</p>
         <ul className="options-list">
           {this.props.options.map((el) => {
             const itemStyle = cn("option-item", {
               "option-item-selected": this.props.value === el.value,
+              "cart-popup": this.props.className === "cart-popup",
             });
 
+            const divItemStyle = cn("list-item-block", {
+              "cart-popup": this.props.className === "cart-popup",
+            });
+            const pItemStyle = cn("list-item-text", {
+              "cart-popup": this.props.className === "cart-popup",
+            });
             return (
               <li
                 className={itemStyle}
@@ -24,8 +37,8 @@ class OptionsPicker extends React.Component {
                 data-option={el.value}
                 onClick={this.selectValue}
               >
-                <div className="list-item-block">
-                  <p className="list-item-text">{el.value}</p>
+                <div className={divItemStyle}>
+                  <p className={pItemStyle}>{el.value}</p>
                 </div>
               </li>
             );

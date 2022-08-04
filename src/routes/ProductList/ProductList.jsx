@@ -18,6 +18,7 @@ class ProductList extends React.Component {
           {allProducts?.map((el) => {
             return (
               <Link
+                style={{ textDecoration: "none" }}
                 to={`/${this.props.match.params.name}/${el.id}`}
                 key={el.id}
               >

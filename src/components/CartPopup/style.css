@@ -1,0 +1,73 @@
+.wrapper {
+  background-color: rgba(57, 55, 72, 0.22);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.small-cart {
+  cursor: default;
+  overflow: scroll;
+  padding: 32px 16px;
+  position: absolute;
+  width: 325px;
+  height: 625px;
+  background-color: white;
+  top: 80px;
+  right: 0px;
+  z-index: 2;
+}
+.small-cart-title {
+  margin: 0 0 32px;
+}
+
+.small-cart-total {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.small-cart-total-text {
+  margin: 0;
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 160%;
+  color: #1d1f22;
+}
+.small-cart-btn-block {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.small-cart-btn {
+  width: 140px;
+  margin: 0 auto;
+  padding: 16px 0;
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  cursor: pointer;
+}
+
+.cart-btn-view {
+  border: 1px solid #1d1f22;
+  background-color: white;
+  color: #1d1f22;
+}
+.cart-btn-view:hover {
+  background-color: rgb(218, 215, 215);
+}
+.cart-btn-checkout {
+  background-color: #5ece7b;
+  color: white;
+  border: 1px solid #5ece7b;
+}
+.cart-btn-checkout:hover {
+  background-color: #4ba964;
+  border: 1px solid #4ba964;
+}

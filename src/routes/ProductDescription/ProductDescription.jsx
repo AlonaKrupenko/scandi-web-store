@@ -13,6 +13,7 @@ class ProductDescription extends React.Component {
     this.state = {
       selectedValue: "",
       selectedColorValue: "",
+      selectedPhoto: "null",
     };
   }
   addValue = (value) => {
@@ -24,6 +25,9 @@ class ProductDescription extends React.Component {
 
   render() {
     const productData = this.props.data?.product;
+    if (productData) {
+      localStorage.setItem("product", JSON.stringify(productData));
+    }
 
     const btnClasses = cn("btn-add", {
       "not-available": !productData?.inStock,

@@ -1,12 +1,26 @@
 .option-block {
   margin-bottom: 24px;
 }
+.option-block.cart-popup {
+  margin-bottom: 8px;
+}
+.option-block.cart-popup:last-child {
+  margin-bottom: 0px;
+}
+
 .option-name {
   margin: 0 0 8px 0;
   font-family: "Roboto Condensed";
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
+}
+.option-name.cart-popup {
+  margin: 0 0 8px 0;
+  font-family: "Raleway";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
 }
 .options-list {
   margin: 0;
@@ -45,6 +59,7 @@
   margin-right: 8px;
   border: 1px solid #1d1f22;
 }
+
 .option-item.color:last-child {
   margin-right: 0;
 }
@@ -57,4 +72,26 @@
   min-width: unset;
   height: 32px;
   width: 32px;
+}
+.list-item-block.color.cart-popup {
+  margin-bottom: 0;
+  height: 16px;
+  width: 16px;
+  min-width: unset;
+}
+
+.option-item.cart-popup {
+  margin-right: 8px;
+}
+.list-item-block.cart-popup {
+  padding: 0 2px;
+  cursor: pointer;
+  /* border: 1px solid #1d1f22; */
+  min-width: 24px;
+  height: 24px;
+}
+.list-item-text.cart-popup {
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
 }
