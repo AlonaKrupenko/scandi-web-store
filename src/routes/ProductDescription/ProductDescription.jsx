@@ -13,7 +13,7 @@ class ProductDescription extends React.Component {
     this.state = {
       selectedValue: "",
       selectedColorValue: "",
-      selectedPhoto: "null",
+      selectedPhoto: "",
     };
   }
   addValue = (value) => {
@@ -21,6 +21,9 @@ class ProductDescription extends React.Component {
   };
   addColorValue = (value) => {
     this.setState({ selectedColorValue: value });
+  };
+  showImg = (e) => {
+    this.setState({ selectedPhoto: e.target.src });
   };
 
   render() {
@@ -39,12 +42,27 @@ class ProductDescription extends React.Component {
           <div className="preview-block">
             {productData?.gallery.map((el, index) => {
               return (
-                <img className="preview-img" src={el} alt="" key={index} />
+                <img
+                  className="preview-img"
+                  src={el}
+                  alt=""
+                  key={index}
+                  onClick={this.showImg}
+                />
               );
             })}
           </div>
           <div className="img-wrapper">
-            <img className="main-img" src={productData?.gallery[0]} alt="" />
+            <img
+              className="main-img"
+              src={
+                this.state.selectedPhoto === ""
+                  ? productData?.gallery[0]
+                  : this.state.selectedPhoto
+              }
+              alt=""
+            />
+            {console.log(this.state.selectedPhoto)}
           </div>
         </div>
         <div className="description-content">
