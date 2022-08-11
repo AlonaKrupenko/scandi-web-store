@@ -1,17 +1,19 @@
 import React from "react";
-import ColorsOptionsPicker from "../OptionsPicker/ColorsOptionsPicker";
-import OptionsPicker from "../OptionsPicker/OptionsPicker";
-import QuantitySelector from "./../QuantitySelector/QuantitySelector";
+import ColorsOptionsPicker from "../../OptionsPicker/ColorsOptionsPicker";
+import OptionsPicker from "../../OptionsPicker/OptionsPicker";
+import QuantitySelector from "../../QuantitySelector/QuantitySelector";
 import "./style.css";
 
 class PopupItem extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  changeQuantity = (quantity) => {
+    this.props.onChangeQuantity(this.props.data.id, quantity);
+  };
+
+  changeAttribute = (attributeId) => (value) => {
+    this.props.onChangeAttribute(this.props.data.id, attributeId, value);
+  };
 
   render() {
-    console.log(this.props.data);
-
     return (
       <div className="item-wrapper">
         <div className="small-cart-description-block">
@@ -31,19 +33,19 @@ class PopupItem extends React.Component {
                 <OptionsPicker
                   className="cart-popup"
                   key={el.id}
-                  // value={this.state.selectedValue}
+                  value={this.props.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  // onSelect={this.addValue}
+                  onSelect={this.changeAttribute(el.id)}
                 />
               ) : (
                 <ColorsOptionsPicker
                   className="cart-popup"
                   key={el.id}
-                  // value={this.state.selectedColorValue}
+                  value={this.props.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  // onSelect={this.addColorValue}
+                  onSelect={this.changeAttribute(el.id)}
                 />
               );
             })}
@@ -54,6 +56,7 @@ class PopupItem extends React.Component {
           className="small-cart-qnt-selector"
           size="small"
           value={this.props.data.quantity}
+          onChange={this.changeQuantity}
         />
         <div className="img-wrapper">
           <img

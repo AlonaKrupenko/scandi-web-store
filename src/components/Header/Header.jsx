@@ -3,7 +3,8 @@ import "./style.css";
 import NavWithApolloWithRouter from "./Nav/NavTabs";
 import { ReactComponent as Logo } from "../../assets/store_logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart_pic.svg";
-import CartPopup from "./../CartPopup/CartPopup";
+import ConnectedCartPopup from "./../CartPopup/CartPopup";
+import { connect } from "react-redux";
 
 class Header extends React.Component {
   constructor(props) {
@@ -28,11 +29,13 @@ class Header extends React.Component {
           <Logo className="logo-img" />
           <div className="cart-wrapper" onClick={this.showCart}>
             <Cart className="cart-icon" />
+
             <div className="cart-indicator">
-              <p style={{ margin: "0" }}>{this.props.value}</p>
+              <p style={{ margin: "0" }}>{this.props.quantity}</p>
             </div>
+
             {this.state.isCartVisible ? (
-              <CartPopup onClose={this.hideCart} />
+              <ConnectedCartPopup onClose={this.hideCart} />
             ) : null}
           </div>
         </div>
@@ -40,5 +43,12 @@ class Header extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    quantity: state.cart.list.length,
+  };
+};
 
-export default Header;
+const ConnectedHeader = connect(mapStateToProps, null)(Header);
+
+export default ConnectedHeader;

@@ -1,9 +1,13 @@
 import React from "react";
 import "./style.css";
-import { ReactComponent as AddToCart } from "../../assets/add_to_cart.svg";
+import { ReactComponent as AddToCart } from "../../../assets/add_to_cart.svg";
 import cn from "classnames";
 
 class ProductCard extends React.Component {
+  onClickToCartIcon = (e) => {
+    e.preventDefault();
+    this.props.onAdd(this.props.id);
+  };
   render() {
     const cardTitleClasses = cn("product-name", {
       "out-of-stock": !this.props.inStock,
@@ -28,7 +32,10 @@ class ProductCard extends React.Component {
             <p className={wrapperTextClasses}>OUT OF STOCK</p>
           </div>
         </div>
-        <AddToCart className={addToCartClasses} />
+        <AddToCart
+          className={addToCartClasses}
+          onClick={this.onClickToCartIcon}
+        />
         <div className="product-info">
           <h3 className={cardTitleClasses}>{this.props.name}</h3>
           <p className={cardPriceClasses}>

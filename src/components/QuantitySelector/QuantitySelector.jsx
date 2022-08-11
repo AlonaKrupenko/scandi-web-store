@@ -25,6 +25,8 @@ class QuantitySelector extends React.Component {
     const containerClasses = cn("control-qnt", {
       "small-cart-qnt-selector":
         this.props.className === "small-cart-qnt-selector",
+      "main-cart-qnt-selector":
+        this.props.className === "main-cart-qnt-selector",
     });
 
     return (

@@ -1,6 +1,9 @@
 .option-block {
   margin-bottom: 24px;
 }
+/* .option-block:last-child {
+  margin: 0;
+} */
 .option-block.cart-popup {
   margin-bottom: 8px;
 }

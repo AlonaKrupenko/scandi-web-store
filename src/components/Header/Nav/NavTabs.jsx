@@ -4,11 +4,11 @@ import cn from "classnames";
 import { graphql } from "@apollo/client/react/hoc";
 import { GET_CATEGORY_NAMES } from "../../../graphQL/Queries";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 class NavTabs extends React.Component {
   onCategoryClick = (category) => () => {
-    this.props.history.push(category);
-    console.log(this.props.history);
+    this.props.history.push("/" + category);
   };
 
   render() {
@@ -27,7 +27,12 @@ class NavTabs extends React.Component {
               key={el.name}
               onClick={this.onCategoryClick(el.name)}
             >
+              {/* <Link
+                to={`/${this.props.match.params.name}`}
+                style={{ textDecoration: "none", listStyle: "none" }}
+              > */}
               {el.name.toUpperCase()}
+              {/* </Link> */}
             </li>
           );
         })}

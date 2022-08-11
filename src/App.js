@@ -4,10 +4,15 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-import Header from "./components/Header/Header";
-import ProductListWithApolloWithRouter from "./routes/ProductList/ProductList";
-import ProductDescriptionWithApolloWithRouter from "./routes/ProductDescription/ProductDescription";
+import ConnectedHeader from "./components/Header/Header";
+import ConnectedProductListWithApolloWithRouter from "./routes/ProductList/ProductList";
+import ConnectedProductDescriptionWithApolloWithRouter from "./routes/ProductDescription/ProductDescription";
+import ConnectedCart from "./routes/Cart/Cart";
+// import NotFound from "./routes/NotFound/NotFound";
+
 // import QuantitySelector from "./components/QuantitySelector/QuantitySelector";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 // const fullData = {
 //   id: "",
@@ -40,40 +45,40 @@ import ProductDescriptionWithApolloWithRouter from "./routes/ProductDescription/
 // };
 
 // const cartSize = "small";
-const itemValue = 12;
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   uri: "http://localhost:4000",
+  defaultOptions: {
+    query: {
+      fetchPolicy: "no-cache",
+    },
+  },
 });
 
 class App extends React.Component {
-  changeValue = (value) => {
-    console.log(value);
-  };
-
   render() {
     return (
-      <ApolloProvider client={client}>
-        <Router>
-          <div className="App">
-            <Header value={itemValue} />
-            <Switch>
-              <Route exact path="/:name">
-                <ProductListWithApolloWithRouter />
-              </Route>
-              <Route path="/:name/:id">
-                <ProductDescriptionWithApolloWithRouter />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-        {/* <QuantitySelector
-          size={cartSize}
-          value={itemValue}
-          onChange={this.changeValue}
-        /> */}
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <Router>
+            <div className="App">
+              <ConnectedHeader />
+              <Switch>
+                <Route exact path="/cart">
+                  <ConnectedCart />
+                </Route>
+                <Route exact path="/:name">
+                  <ConnectedProductListWithApolloWithRouter />
+                </Route>
+                <Route path="/:name/:id">
+                  <ConnectedProductDescriptionWithApolloWithRouter />
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+        </ApolloProvider>
+      </Provider>
     );
   }
 }
