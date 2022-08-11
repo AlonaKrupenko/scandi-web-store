@@ -84,6 +84,9 @@
   font-size: 16px;
   line-height: 120%;
 }
+.btn-add:hover {
+  background-color: #479f5e;
+}
 
 .not-available {
   cursor: default;

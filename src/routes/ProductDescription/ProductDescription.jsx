@@ -37,8 +37,6 @@ class ProductDescription extends React.Component {
           {}
         );
 
-        console.log(selectedAttributes);
-
         this.setState({
           product: res.data.product,
           selectedAttributes,

@@ -1,0 +1,32 @@
+.currency-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* max-width: 170px; */
+}
+
+.dropdown-icons-wrapper {
+  display: flex;
+}
+.currency-list {
+  margin: 0;
+  padding: 12px 0;
+  position: absolute;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  top: 24px;
+  right: 0;
+  background-color: #ffffff;
+}
+
+.currency-item {
+  height: 45px;
+  padding: 8px 40px 8px 20px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 18px;
+}
+.currency-item:hover {
+  background-color: #eeeeee;
+}

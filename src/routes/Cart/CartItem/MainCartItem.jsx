@@ -8,6 +8,12 @@ import { ReactComponent as BtnRight } from "../../../assets/cart_btn_right.svg";
 import { ReactComponent as BtnLeft } from "../../../assets/cart_btn_left.svg";
 
 class MainCartItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPhoto: 0,
+    };
+  }
   changeQuantity = (quantity) => {
     this.props.onChangeQuantity(this.props.data.id, quantity);
   };
@@ -15,8 +21,22 @@ class MainCartItem extends React.Component {
   changeAttribute = (attributeId) => (value) => {
     this.props.onChangeAttribute(this.props.data.id, attributeId, value);
   };
+
+  switchPhoto = (type) => () => {
+    if (type === "next") {
+      if (
+        this.state.currentPhoto <
+        this.props.data.product.gallery.length - 1
+      ) {
+        this.setState({ currentPhoto: this.state.currentPhoto + 1 });
+      }
+    } else {
+      if (this.state.currentPhoto > 0)
+        this.setState({ currentPhoto: this.state.currentPhoto - 1 });
+    }
+  };
+
   render() {
-    console.log(this.props.data, "data in Cart Item");
     return (
       <div className="main-cart-item-wrapper">
         <div className="main-cart-description-block">
@@ -34,7 +54,6 @@ class MainCartItem extends React.Component {
             {this.props.data.product.attributes.map((el) => {
               return el.id !== "Color" ? (
                 <OptionsPicker
-                  // className="main-cart"
                   key={el.id}
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
@@ -43,7 +62,6 @@ class MainCartItem extends React.Component {
                 />
               ) : (
                 <ColorsOptionsPicker
-                  // className="main-cart"
                   key={el.id}
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
@@ -62,14 +80,21 @@ class MainCartItem extends React.Component {
             onChange={this.changeQuantity}
           />
           <div className="main-cart-img-wrapper">
+            {/* {console.log(this.props.data.product.gallery.length)} */}
             <img
               className="main-cart-img"
-              src={this.props.data.product.gallery[0]}
+              src={this.props.data.product.gallery[this.state.currentPhoto]}
               alt=""
             />
             <div className="switch-btn-block">
-              <BtnLeft style={{ marginRight: "8px", cursor: "pointer" }} />
-              <BtnRight style={{ cursor: "pointer" }} />
+              <BtnLeft
+                style={{ marginRight: "8px", cursor: "pointer" }}
+                onClick={this.switchPhoto("previous")}
+              />
+              <BtnRight
+                style={{ cursor: "pointer" }}
+                onClick={this.switchPhoto("next")}
+              />
             </div>
           </div>
         </div>

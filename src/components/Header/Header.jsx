@@ -3,7 +3,9 @@ import "./style.css";
 import NavWithApolloWithRouter from "./Nav/NavTabs";
 import { ReactComponent as Logo } from "../../assets/store_logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart_pic.svg";
+
 import ConnectedCartPopup from "./../CartPopup/CartPopup";
+import ConnectedCurrencyDropdown from "./CurrencyDropdown/CurrencyDropdown";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
@@ -14,7 +16,7 @@ class Header extends React.Component {
     };
   }
 
-  showCart = (e) => {
+  showCart = () => {
     this.setState({ isCartVisible: true });
   };
   hideCart = () => {
@@ -22,21 +24,25 @@ class Header extends React.Component {
   };
 
   render() {
+    console.log(this.props, "header props");
     return (
       <div className="header">
         <div className="nav">
           <NavWithApolloWithRouter />
           <Logo className="logo-img" />
-          <div className="cart-wrapper" onClick={this.showCart}>
-            <Cart className="cart-icon" />
+          <div className="dropdown-icons-wrapper">
+            <ConnectedCurrencyDropdown className="" />
+            <div className="cart-wrapper" onClick={this.showCart}>
+              <Cart className="cart-icon" />
 
-            <div className="cart-indicator">
-              <p style={{ margin: "0" }}>{this.props.quantity}</p>
+              <div className="cart-indicator">
+                <p style={{ margin: "0" }}>{this.props.quantity}</p>
+              </div>
+
+              {this.state.isCartVisible ? (
+                <ConnectedCartPopup onClose={this.hideCart} />
+              ) : null}
             </div>
-
-            {this.state.isCartVisible ? (
-              <ConnectedCartPopup onClose={this.hideCart} />
-            ) : null}
           </div>
         </div>
       </div>

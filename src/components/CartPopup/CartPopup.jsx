@@ -12,7 +12,6 @@ class CartPopup extends React.Component {
   };
 
   onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
-    console.log(cartItemId, attributeId, attributeValue, "allProps popup");
     this.props.dispatch(
       cartSlice.actions.changeAttributes({
         cartItemId: cartItemId,

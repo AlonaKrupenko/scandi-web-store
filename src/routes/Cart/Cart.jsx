@@ -6,7 +6,6 @@ import "./style.css";
 
 class Cart extends React.Component {
   onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
-    console.log(cartItemId, attributeId, attributeValue, "allProps popup");
     this.props.dispatch(
       cartSlice.actions.changeAttributes({
         cartItemId: cartItemId,
@@ -36,7 +35,6 @@ class Cart extends React.Component {
           CART
         </h1>
         {this.props.dataList.map((el) => {
-          console.log(el);
           return (
             <MainCartItem
               data={el}
