@@ -46,8 +46,7 @@ class MainCartItem extends React.Component {
             </h3>
             <p className="main-cart-name">{this.props.data.product.name}</p>
             <p className="main-cart-price">
-              {this.props.data.product.prices[0].currency.symbol +
-                this.props.data.product.prices[0].amount}
+              {this.props.priceSymb + this.props.price}
             </p>
           </div>
           <div>
@@ -80,7 +79,6 @@ class MainCartItem extends React.Component {
             onChange={this.changeQuantity}
           />
           <div className="main-cart-img-wrapper">
-            {/* {console.log(this.props.data.product.gallery.length)} */}
             <img
               className="main-cart-img"
               src={this.props.data.product.gallery[this.state.currentPhoto]}

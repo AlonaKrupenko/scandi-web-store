@@ -24,7 +24,6 @@ class Header extends React.Component {
   };
 
   render() {
-    console.log(this.props, "header props");
     return (
       <div className="header">
         <div className="nav">
@@ -51,7 +50,9 @@ class Header extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    quantity: state.cart.list.length,
+    quantity: state.cart.list.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0),
   };
 };
 

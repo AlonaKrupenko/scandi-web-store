@@ -23,8 +23,7 @@ class PopupItem extends React.Component {
             </h3>
             <p className="small-cart-name">{this.props.data.product.name}</p>
             <p className="small-cart-price">
-              {this.props.data.product.prices[0].currency.symbol +
-                this.props.data.product.prices[0].amount}
+              {this.props.priceSymb + this.props.price}
             </p>
           </div>
           <div>

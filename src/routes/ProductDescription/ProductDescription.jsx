@@ -3,18 +3,19 @@ import "./style.css";
 import cn from "classnames";
 import OptionsPicker from "../../components/OptionsPicker/OptionsPicker";
 import ColorsOptionsPicker from "../../components/OptionsPicker/ColorsOptionsPicker";
-// import { graphql } from "@apollo/client/react/hoc";
 import { GET_PRODUCT } from "../../graphQL/Queries";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { cartSlice } from "./../../redux/cart";
 import { v4 as uuidv4 } from "uuid";
 import { client } from "../../App";
+import getPrice from "./../../helpers/getPrice";
 
 class ProductDescription extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       selectedPhoto: "",
       product: {},
       selectedAttributes: {},
@@ -22,6 +23,7 @@ class ProductDescription extends React.Component {
   }
 
   fetchProductDescription = (productId) => {
+    this.setState({ loading: true });
     client
       .query({
         query: GET_PRODUCT,
@@ -40,6 +42,7 @@ class ProductDescription extends React.Component {
         this.setState({
           product: res.data.product,
           selectedAttributes,
+          loading: false,
         });
       });
   };
@@ -85,21 +88,20 @@ class ProductDescription extends React.Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return null;
+    }
     const productData = this.state.product;
 
-    if (productData) {
-      localStorage.setItem("product", JSON.stringify(productData));
-    }
-
     const btnClasses = cn("btn-add", {
-      "not-available": !productData?.inStock,
+      "not-available": !productData.inStock,
     });
 
     return (
       <div className="description-block">
         <div className="img-block">
           <div className="preview-block">
-            {productData?.gallery?.map((el, index) => {
+            {productData.gallery.map((el, index) => {
               return (
                 <img
                   className="preview-img"
@@ -116,7 +118,7 @@ class ProductDescription extends React.Component {
               className="description-main-img"
               src={
                 this.state.selectedPhoto === ""
-                  ? productData?.gallery?.[0]
+                  ? productData.gallery[0]
                   : this.state.selectedPhoto
               }
               alt=""
@@ -124,10 +126,10 @@ class ProductDescription extends React.Component {
           </div>
         </div>
         <div className="description-content">
-          <h2 className="heading">{productData?.brand}</h2>
-          <p className="name">{productData?.name}</p>
+          <h2 className="heading">{productData.brand}</h2>
+          <p className="name">{productData.name}</p>
           <div>
-            {productData?.attributes?.map((el) => {
+            {productData.attributes.map((el) => {
               return el.id !== "Color" ? (
                 <OptionsPicker
                   key={el.id}
@@ -149,17 +151,18 @@ class ProductDescription extends React.Component {
           </div>
           <p className="price-heading">PRICE</p>
           <p className="price">
-            {productData?.prices?.[0].currency.symbol +
-              productData?.prices?.[0].amount}
+            {getPrice(productData, this.props.selectedCurrency).currency
+              .symbol +
+              getPrice(productData, this.props.selectedCurrency).amount}
           </p>
           <button
             className={btnClasses}
             onClick={this.onAddToCart}
-            disabled={!productData?.inStock}
+            disabled={!productData.inStock}
           >
             ADD TO CART
           </button>
-          <p className="text">{productData?.description}</p>
+          <p className="text">{productData.description}</p>
         </div>
       </div>
     );
@@ -181,6 +184,7 @@ const ProductDescriptionWithApolloWithRouter = withRouter(ProductDescription);
 const mapStateToProps = (state, ownProps) => {
   return {
     quantity: state.cart.list.length,
+    selectedCurrency: state.currency.selectedCurrency,
   };
 };
 

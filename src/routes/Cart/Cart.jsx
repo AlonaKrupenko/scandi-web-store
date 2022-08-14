@@ -3,6 +3,7 @@ import MainCartItem from "./CartItem/MainCartItem";
 import { connect } from "react-redux";
 import { cartSlice } from "../../redux/cart";
 import "./style.css";
+import getPrice from "./../../helpers/getPrice";
 
 class Cart extends React.Component {
   onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
@@ -38,6 +39,11 @@ class Cart extends React.Component {
           return (
             <MainCartItem
               data={el}
+              priceSymb={
+                getPrice(el.product, this.props.selectedCurrency).currency
+                  .symbol
+              }
+              price={getPrice(el.product, this.props.selectedCurrency).amount}
               key={el.id}
               onChangeQuantity={this.onChangeQuantity}
               onChangeAttribute={this.onChangeAttribute}
@@ -52,6 +58,7 @@ class Cart extends React.Component {
 const mapStateToProps = (state) => {
   return {
     dataList: state.cart.list,
+    selectedCurrency: state.currency.selectedCurrency,
   };
 };
 

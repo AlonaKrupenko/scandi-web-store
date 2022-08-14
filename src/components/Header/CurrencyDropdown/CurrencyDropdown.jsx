@@ -6,6 +6,7 @@ import { ReactComponent as ArrowUp } from "../../../assets/dropdown_up.svg";
 import { ReactComponent as ArrowDown } from "../../../assets/dropdown_down.svg";
 import { connect } from "react-redux";
 import { currencySlice } from "../../../redux/currency";
+import cn from "classnames";
 
 class CurrencyDropdown extends React.Component {
   constructor(props) {
@@ -56,16 +57,19 @@ class CurrencyDropdown extends React.Component {
     }
   };
 
-  selectCurrency = (currency) => () => {
+  selectCurrency = (currency) => (event) => {
+    event.stopPropagation();
+
     this.props.dispatch(currencySlice.actions.changeCurrency(currency));
-    console.log(currency, "curr");
   };
 
   render() {
-    console.log(this.props, "proooops");
     return (
-      <div className={`currency-dropdown ${this.props.className}`}>
-        <span onClick={this.showMenu}>
+      <div
+        className={`currency-dropdown ${this.props.className}`}
+        onClick={this.showMenu}
+      >
+        <span className="currency-symbol">
           {this.props.selectedCurrency.symbol}
         </span>
         {this.state.isOpen ? <ArrowUp /> : <ArrowDown />}
@@ -73,10 +77,15 @@ class CurrencyDropdown extends React.Component {
         {this.state.isOpen ? (
           <ul className="currency-list" ref={this.dropdownMenu}>
             {this.state.currenciesData.map((el) => {
+              const activeCurrency = cn("currency-item", {
+                "active-currency-item":
+                  this.props.selectedCurrency.label === el.label,
+              });
+
               return (
                 <li
                   key={el.symbol}
-                  className="currency-item"
+                  className={activeCurrency}
                   onClick={this.selectCurrency(el)}
                 >
                   {el.symbol} {el.label}

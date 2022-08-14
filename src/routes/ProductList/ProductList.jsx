@@ -1,7 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard/ProductCard";
 import "./style.css";
-// import { graphql } from "@apollo/client/react/hoc";
 import { GET_CATEGORY } from "../../graphQL/Queries";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import { connect } from "react-redux";
 import { cartSlice } from "./../../redux/cart";
 import { v4 as uuidv4 } from "uuid";
 import { client } from "../../App";
+import getPrice from "./../../helpers/getPrice";
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -84,8 +84,10 @@ class ProductList extends React.Component {
                   onAdd={this.addToCart}
                   img={el.gallery[0]}
                   name={el.name}
-                  priceSymb={el.prices[0].currency.symbol}
-                  price={el.prices[0].amount}
+                  priceSymb={
+                    getPrice(el, this.props.selectedCurrency).currency.symbol
+                  }
+                  price={getPrice(el, this.props.selectedCurrency).amount}
                   inStock={el.inStock}
                 />
               </Link>
@@ -113,6 +115,7 @@ const ProductListWithApolloWithRouter = withRouter(ProductList);
 const mapStateToProps = (state) => {
   return {
     dataList: state.cart.list,
+    selectedCurrency: state.currency.selectedCurrency,
   };
 };
 
