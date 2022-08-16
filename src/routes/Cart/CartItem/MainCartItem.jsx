@@ -3,6 +3,7 @@ import ColorsOptionsPicker from "../../../components/OptionsPicker/ColorsOptions
 import OptionsPicker from "../../../components/OptionsPicker/OptionsPicker";
 import QuantitySelector from "../../../components/QuantitySelector/QuantitySelector";
 import "./style.css";
+import cn from "classnames";
 
 import { ReactComponent as BtnRight } from "../../../assets/cart_btn_right.svg";
 import { ReactComponent as BtnLeft } from "../../../assets/cart_btn_left.svg";
@@ -37,6 +38,10 @@ class MainCartItem extends React.Component {
   };
 
   render() {
+    const switchBtnClass = cn("switch-btn-block", {
+      "not-visible": this.props.data.product.gallery.length === 1,
+    });
+
     return (
       <div className="main-cart-item-wrapper">
         <div className="main-cart-description-block">
@@ -84,7 +89,7 @@ class MainCartItem extends React.Component {
               src={this.props.data.product.gallery[this.state.currentPhoto]}
               alt=""
             />
-            <div className="switch-btn-block">
+            <div className={switchBtnClass}>
               <BtnLeft
                 style={{ marginRight: "8px", cursor: "pointer" }}
                 onClick={this.switchPhoto("previous")}
