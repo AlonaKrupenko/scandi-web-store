@@ -185,7 +185,7 @@ class ProductDescription extends React.Component {
   }
 }
 
-const ProductDescriptionWithApolloWithRouter = withRouter(ProductDescription);
+const ProductDescriptionWithRouter = withRouter(ProductDescription);
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -194,9 +194,9 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const ConnectedProductDescriptionWithApolloWithRouter = connect(
+const ConnectedProductDescriptionWithRouter = connect(
   mapStateToProps,
   null
-)(ProductDescriptionWithApolloWithRouter);
+)(ProductDescriptionWithRouter);
 
-export default ConnectedProductDescriptionWithApolloWithRouter;
+export default ConnectedProductDescriptionWithRouter;

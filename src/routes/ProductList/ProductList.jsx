@@ -115,18 +115,7 @@ class ProductList extends React.Component {
   }
 }
 
-// const ProductListWithApollo = graphql(GET_CATEGORY, {
-//   options: (props) => {
-//     return {
-//       variables: {
-//         categoryName: props.match.params.name,
-//       },
-//       fetchPolicy: "no-cached",
-//     };
-//   },
-// })(ProductList);
-
-const ProductListWithApolloWithRouter = withRouter(ProductList);
+const ProductListWithRouter = withRouter(ProductList);
 
 const mapStateToProps = (state) => {
   return {
@@ -135,9 +124,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-const ConnectedProductListWithApolloWithRouter = connect(
+const ConnectedProductListWithRouter = connect(
   mapStateToProps,
   null
-)(ProductListWithApolloWithRouter);
+)(ProductListWithRouter);
 
-export default ConnectedProductListWithApolloWithRouter;
+export default ConnectedProductListWithRouter;

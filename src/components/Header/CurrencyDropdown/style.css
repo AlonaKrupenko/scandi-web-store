@@ -2,7 +2,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  /* max-width: 170px; */
 }
 .currency-symbol {
   padding-right: 10px;

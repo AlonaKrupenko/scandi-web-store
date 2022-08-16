@@ -72,6 +72,6 @@ class NavTabs extends React.Component {
   }
 }
 
-const NavWithApolloWithRouter = withRouter(NavTabs);
+const NavWithRouter = withRouter(NavTabs);
 
-export default NavWithApolloWithRouter;
+export default NavWithRouter;

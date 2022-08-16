@@ -1,9 +1,8 @@
 import React from "react";
 import "./style.css";
-import NavWithApolloWithRouter from "./Nav/NavTabs";
+import NavWithRouter from "./Nav/NavTabs";
 import { ReactComponent as Logo } from "../../assets/store_logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart_pic.svg";
-
 import ConnectedCartPopup from "./../CartPopup/CartPopup";
 import ConnectedCurrencyDropdown from "./CurrencyDropdown/CurrencyDropdown";
 import { connect } from "react-redux";
@@ -27,7 +26,7 @@ class Header extends React.Component {
     return (
       <div className="header">
         <div className="nav">
-          <NavWithApolloWithRouter />
+          <NavWithRouter />
           <Logo className="logo-img" />
           <div className="dropdown-icons-wrapper">
             <ConnectedCurrencyDropdown className="" />
