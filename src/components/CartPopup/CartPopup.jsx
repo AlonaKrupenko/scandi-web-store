@@ -69,7 +69,11 @@ class CartPopup extends React.Component {
             <div className="small-cart-total">
               <p className="small-cart-total-text">Total</p>
               <p className="small-cart-total-text">
-                {getCartTotal(this.props.dataList, this.props.selectedCurrency)}
+                {this.props.selectedCurrency.symbol +
+                  getCartTotal(
+                    this.props.dataList,
+                    this.props.selectedCurrency
+                  )}
               </p>
             </div>
 

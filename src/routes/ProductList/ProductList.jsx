@@ -9,6 +9,7 @@ import { cartSlice } from "./../../redux/cart";
 import { v4 as uuidv4 } from "uuid";
 import { client } from "../../App";
 import getPrice from "./../../helpers/getPrice";
+import NotFound from "../NotFound/NotFound";
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -16,10 +17,13 @@ class ProductList extends React.Component {
     this.state = {
       productList: [],
       category: {},
+      loading: true,
+      notFound: false,
     };
   }
 
   fetchProducts = (categoryName) => {
+    this.setState({ loading: true });
     client
       .query({
         query: GET_CATEGORY,
@@ -28,10 +32,16 @@ class ProductList extends React.Component {
         },
       })
       .then((res) => {
-        this.setState({
-          productList: res.data.category.products,
-          category: res.data.category,
-        });
+        if (res.data.category) {
+          this.setState({
+            productList: res.data.category.products,
+            category: res.data.category,
+            loading: false,
+            notFound: false,
+          });
+        } else {
+          this.setState({ notFound: true, loading: false });
+        }
       });
   };
 
@@ -65,14 +75,20 @@ class ProductList extends React.Component {
   };
 
   render() {
+    if (this.state.loading) {
+      return null;
+    }
+    if (this.state.notFound) {
+      return <NotFound />;
+    }
     const allProducts = this.state.productList;
     return (
       <div className="product-list-container">
         <h1 className="product-list-title">
-          {this.state.category?.name?.toUpperCase()}
+          {this.state.category.name.toUpperCase()}
         </h1>
         <div className="product-list-cards-block">
-          {allProducts?.map((el) => {
+          {allProducts.map((el) => {
             return (
               <Link
                 style={{ textDecoration: "none" }}

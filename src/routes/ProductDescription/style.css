@@ -73,6 +73,7 @@
 }
 
 .btn-add {
+  margin-bottom: 40px;
   padding: 16px 32px;
   width: 100%;
   border: none;
@@ -90,9 +91,12 @@
 
 .not-available {
   cursor: default;
+  pointer-events: none;
   background-color: #858585;
 }
 .text {
+  max-height: 250px;
+  overflow: scroll;
   font-family: "Roboto";
   text-align: justify;
   font-weight: 400;

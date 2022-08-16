@@ -1,7 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 import ConnectedHeader from "./components/Header/Header";
@@ -73,6 +78,9 @@ class App extends React.Component {
                 </Route>
                 <Route path="/:name/:id">
                   <ConnectedProductDescriptionWithApolloWithRouter />
+                </Route>
+                <Route path="/">
+                  <Redirect to="/all" />
                 </Route>
               </Switch>
             </div>

@@ -5,7 +5,7 @@ const getCartTotal = (list, selectedCurency) => {
     const price = getPrice(el.product, selectedCurency);
     return acc + price.amount * el.quantity;
   }, 0);
-  return selectedCurency.symbol + total.toFixed(2);
+  return total.toFixed(2);
 };
 
 export default getCartTotal;

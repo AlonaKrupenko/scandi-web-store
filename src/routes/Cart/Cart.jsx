@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { cartSlice } from "../../redux/cart";
 import "./style.css";
 import getPrice from "./../../helpers/getPrice";
+import getCartTotal from "./../../helpers/getCartTotal";
 
 class Cart extends React.Component {
   onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
@@ -50,6 +51,31 @@ class Cart extends React.Component {
             />
           );
         })}
+        <div className="total-block">
+          <div className="grid-block">
+            <div className="total-name">Tax 21%: </div>
+            <div className="total-value">
+              {this.props.selectedCurrency.symbol +
+                (
+                  getCartTotal(
+                    this.props.dataList,
+                    this.props.selectedCurrency
+                  ) * 0.21
+                ).toFixed(2)}
+            </div>
+
+            <div className="total-name">Quantity: </div>
+            <div className="total-value">{this.props.quantity}</div>
+
+            <div className="total-name total">Total: </div>
+            <div className="total-value">
+              {this.props.selectedCurrency.symbol +
+                getCartTotal(this.props.dataList, this.props.selectedCurrency)}
+            </div>
+          </div>
+
+          <button className="page-cart-btn">ORDER</button>
+        </div>
       </>
     );
   }
@@ -57,6 +83,9 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    quantity: state.cart.list.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0),
     dataList: state.cart.list,
     selectedCurrency: state.currency.selectedCurrency,
   };

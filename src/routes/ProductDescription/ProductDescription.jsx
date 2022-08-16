@@ -10,6 +10,8 @@ import { cartSlice } from "./../../redux/cart";
 import { v4 as uuidv4 } from "uuid";
 import { client } from "../../App";
 import getPrice from "./../../helpers/getPrice";
+import NotFound from "../NotFound/NotFound";
+import sanitizeHtml from "sanitize-html";
 
 class ProductDescription extends React.Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class ProductDescription extends React.Component {
       selectedPhoto: "",
       product: {},
       selectedAttributes: {},
+      notFound: false,
     };
   }
 
@@ -32,18 +35,23 @@ class ProductDescription extends React.Component {
         },
       })
       .then((res) => {
-        const selectedAttributes = res.data.product.attributes.reduce(
-          (acc, item) => {
-            return { ...acc, [item.id]: item.items[0].value };
-          },
-          {}
-        );
+        if (res.data.product) {
+          const selectedAttributes = res.data.product.attributes.reduce(
+            (acc, item) => {
+              return { ...acc, [item.id]: item.items[0].value };
+            },
+            {}
+          );
 
-        this.setState({
-          product: res.data.product,
-          selectedAttributes,
-          loading: false,
-        });
+          this.setState({
+            product: res.data.product,
+            selectedAttributes,
+            loading: false,
+            notFound: false,
+          });
+        } else {
+          this.setState({ notFound: true, loading: false });
+        }
       });
   };
 
@@ -90,6 +98,9 @@ class ProductDescription extends React.Component {
   render() {
     if (this.state.loading) {
       return null;
+    }
+    if (this.state.notFound) {
+      return <NotFound />;
     }
     const productData = this.state.product;
 
@@ -162,22 +173,17 @@ class ProductDescription extends React.Component {
           >
             ADD TO CART
           </button>
-          <p className="text">{productData.description}</p>
+          <div
+            className="text"
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(productData.description),
+            }}
+          ></div>
         </div>
       </div>
     );
   }
 }
-
-// const ProductDescriptionWithApollo = graphql(GET_PRODUCT, {
-//   options: (props) => {
-//     return {
-//       variables: {
-//         productId: props.match.params.id,
-//       },
-//     };
-//   },
-// })(ProductDescription);
 
 const ProductDescriptionWithApolloWithRouter = withRouter(ProductDescription);
 

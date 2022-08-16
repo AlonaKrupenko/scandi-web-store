@@ -1,0 +1,42 @@
+.total-block {
+  margin-top: 32px;
+  max-width: 280px;
+}
+.grid-block {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 0fr 1fr;
+  grid-gap: 8px;
+}
+.total-name {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.total-name.total {
+  font-weight: 500;
+}
+.total-value {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.page-cart-btn {
+  width: 100%;
+  margin: 16px auto 0;
+  padding: 16px 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  cursor: pointer;
+  background-color: #5ece7b;
+  color: white;
+  border: 1px solid #5ece7b;
+  grid-column: 1 / -1;
+}
+.page-cart-btn:hover {
+  background-color: #4ba964;
+  border: 1px solid #4ba964;
+}

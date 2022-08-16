@@ -43,12 +43,14 @@ class CurrencyDropdown extends React.Component {
     this.setState({
       isOpen: true,
     });
-
     document.addEventListener("click", this.closeMenu);
   };
 
   closeMenu = (event) => {
-    if (!this.dropdownMenu.current.contains(event.target)) {
+    if (
+      this.dropdownMenu.current &&
+      !this.dropdownMenu.current.contains(event.target)
+    ) {
       this.setState({
         isOpen: false,
       });
@@ -61,6 +63,9 @@ class CurrencyDropdown extends React.Component {
     event.stopPropagation();
 
     this.props.dispatch(currencySlice.actions.changeCurrency(currency));
+    this.setState({
+      isOpen: false,
+    });
   };
 
   render() {
