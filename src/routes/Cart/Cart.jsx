@@ -44,7 +44,10 @@ class Cart extends React.Component {
                 getPrice(el.product, this.props.selectedCurrency).currency
                   .symbol
               }
-              price={getPrice(el.product, this.props.selectedCurrency).amount}
+              price={getPrice(
+                el.product,
+                this.props.selectedCurrency
+              ).amount.toFixed(2)}
               key={el.id}
               onChangeQuantity={this.onChangeQuantity}
               onChangeAttribute={this.onChangeAttribute}

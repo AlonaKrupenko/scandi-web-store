@@ -25,15 +25,15 @@ class MainCartItem extends React.Component {
 
   switchPhoto = (type) => () => {
     if (type === "next") {
-      if (
-        this.state.currentPhoto <
-        this.props.data.product.gallery.length - 1
-      ) {
-        this.setState({ currentPhoto: this.state.currentPhoto + 1 });
-      }
+      this.state.currentPhoto < this.props.data.product.gallery.length - 1
+        ? this.setState({ currentPhoto: this.state.currentPhoto + 1 })
+        : this.setState({ currentPhoto: 0 });
     } else {
-      if (this.state.currentPhoto > 0)
-        this.setState({ currentPhoto: this.state.currentPhoto - 1 });
+      this.state.currentPhoto > 0
+        ? this.setState({ currentPhoto: this.state.currentPhoto - 1 })
+        : this.setState({
+            currentPhoto: this.props.data.product.gallery.length - 1,
+          });
     }
   };
 

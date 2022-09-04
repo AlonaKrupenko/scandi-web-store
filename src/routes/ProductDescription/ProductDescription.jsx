@@ -12,6 +12,7 @@ import { client } from "../../App";
 import getPrice from "./../../helpers/getPrice";
 import NotFound from "../NotFound/NotFound";
 import sanitizeHtml from "sanitize-html";
+import { ReactComponent as BtnRight } from "../../assets/cart_btn_right.svg";
 
 class ProductDescription extends React.Component {
   constructor(props) {
@@ -124,6 +125,7 @@ class ProductDescription extends React.Component {
               );
             })}
           </div>
+
           <div className="description-img-wrapper">
             <img
               className="description-main-img"
@@ -164,7 +166,9 @@ class ProductDescription extends React.Component {
           <p className="price">
             {getPrice(productData, this.props.selectedCurrency).currency
               .symbol +
-              getPrice(productData, this.props.selectedCurrency).amount}
+              getPrice(productData, this.props.selectedCurrency).amount.toFixed(
+                2
+              )}
           </p>
           <button
             className={btnClasses}

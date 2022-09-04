@@ -37,7 +37,9 @@ class ProductCard extends React.Component {
           onClick={this.onClickToCartIcon}
         />
         <div className="product-info">
-          <h3 className={cardTitleClasses}>{this.props.name}</h3>
+          <h3 className={cardTitleClasses}>
+            {this.props.brand + " " + this.props.name}
+          </h3>
           <p className={cardPriceClasses}>
             {this.props.priceSymb + this.props.price}
           </p>

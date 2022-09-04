@@ -68,6 +68,7 @@ export const GET_PRODUCT = gql`
     }
   }
 `;
+
 export const GET_CURRENCIES = gql`
   query GetCurrencies {
     currencies {
