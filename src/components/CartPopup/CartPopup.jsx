@@ -13,16 +13,6 @@ class CartPopup extends React.Component {
     this.props.onClose();
   };
 
-  onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
-    this.props.dispatch(
-      cartSlice.actions.changeAttributes({
-        cartItemId: cartItemId,
-        attributeId: attributeId,
-        attributeValue: attributeValue,
-      })
-    );
-  };
-
   onChangeQuantity = (id, qnt) => {
     if (qnt) {
       this.props.dispatch(
@@ -61,7 +51,6 @@ class CartPopup extends React.Component {
                     this.props.selectedCurrency
                   ).amount.toFixed(2)}
                   onChangeQuantity={this.onChangeQuantity}
-                  onChangeAttribute={this.onChangeAttribute}
                 />
               );
             })}

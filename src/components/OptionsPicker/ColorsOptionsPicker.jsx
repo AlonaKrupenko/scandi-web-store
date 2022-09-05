@@ -4,7 +4,9 @@ import "./style.css";
 
 class ColorsOptionsPicker extends React.Component {
   selectColorValue = (event) => {
-    this.props.onSelect(event.currentTarget.dataset.color);
+    if (this.props.onSelect) {
+      this.props.onSelect(event.currentTarget.dataset.color);
+    }
   };
 
   render() {

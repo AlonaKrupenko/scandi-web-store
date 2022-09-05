@@ -9,10 +9,6 @@ class PopupItem extends React.Component {
     this.props.onChangeQuantity(this.props.data.id, quantity);
   };
 
-  changeAttribute = (attributeId) => (value) => {
-    this.props.onChangeAttribute(this.props.data.id, attributeId, value);
-  };
-
   render() {
     return (
       <div className="item-wrapper">
@@ -35,7 +31,6 @@ class PopupItem extends React.Component {
                   value={this.props.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  onSelect={this.changeAttribute(el.id)}
                 />
               ) : (
                 <ColorsOptionsPicker
@@ -44,7 +39,6 @@ class PopupItem extends React.Component {
                   value={this.props.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  onSelect={this.changeAttribute(el.id)}
                 />
               );
             })}

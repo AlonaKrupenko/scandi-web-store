@@ -44,35 +44,6 @@ const cartSlice = createSlice({
         list: updatedList,
       };
     },
-
-    changeAttributes: (state, action) => {
-      const cartItemId = action.payload.cartItemId;
-      const attributeId = action.payload.attributeId;
-      const attributeValue = action.payload.attributeValue;
-
-      const elemIndex = state.list.findIndex((el) => {
-        return el.id === cartItemId;
-      });
-
-      const updatedEl = {
-        ...state.list[elemIndex],
-        selectedAttributes: {
-          ...state.list[elemIndex].selectedAttributes,
-          [attributeId]: attributeValue,
-        },
-      };
-
-      const updatedList = [
-        ...state.list.slice(0, elemIndex),
-        updatedEl,
-        ...state.list.slice(elemIndex + 1),
-      ];
-
-      return {
-        ...state,
-        list: updatedList,
-      };
-    },
   },
 });
 

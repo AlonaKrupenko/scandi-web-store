@@ -109,6 +109,13 @@ class ProductDescription extends React.Component {
       "not-available": !productData.inStock,
     });
 
+    const descriptionWrapperClasses = cn("description-img-overlay", {
+      "description-non-visible-wrapper": productData.inStock,
+    });
+    const descriptionWrapperTextClasses = cn("description-out-of-stock-text", {
+      "description-non-visible": productData.inStock,
+    });
+
     return (
       <div className="description-block">
         <div className="img-block">
@@ -136,6 +143,9 @@ class ProductDescription extends React.Component {
               }
               alt=""
             />
+            <div className={descriptionWrapperClasses}>
+              <p className={descriptionWrapperTextClasses}>OUT OF STOCK</p>
+            </div>
           </div>
         </div>
         <div className="description-content">
@@ -170,6 +180,7 @@ class ProductDescription extends React.Component {
                 2
               )}
           </p>
+          {console.log(productData)}
           <button
             className={btnClasses}
             onClick={this.onAddToCart}

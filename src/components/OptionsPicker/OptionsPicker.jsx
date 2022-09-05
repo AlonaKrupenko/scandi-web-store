@@ -4,7 +4,9 @@ import cn from "classnames";
 
 class OptionsPicker extends React.Component {
   selectValue = (event) => {
-    this.props.onSelect(event.currentTarget.dataset.option);
+    if (this.props.onSelect) {
+      this.props.onSelect(event.currentTarget.dataset.option);
+    }
   };
 
   render() {
@@ -14,6 +16,7 @@ class OptionsPicker extends React.Component {
     const optionBlockStyle = cn("option-block", {
       "cart-popup": this.props.className === "cart-popup",
     });
+
     return (
       <div className={optionBlockStyle}>
         <p className={optionNameStyle}>{this.props.title}:</p>
@@ -30,6 +33,7 @@ class OptionsPicker extends React.Component {
             const pItemStyle = cn("list-item-text", {
               "cart-popup": this.props.className === "cart-popup",
             });
+
             return (
               <li
                 className={itemStyle}

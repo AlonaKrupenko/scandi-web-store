@@ -19,10 +19,6 @@ class MainCartItem extends React.Component {
     this.props.onChangeQuantity(this.props.data.id, quantity);
   };
 
-  changeAttribute = (attributeId) => (value) => {
-    this.props.onChangeAttribute(this.props.data.id, attributeId, value);
-  };
-
   switchPhoto = (type) => () => {
     if (type === "next") {
       this.state.currentPhoto < this.props.data.product.gallery.length - 1
@@ -62,7 +58,6 @@ class MainCartItem extends React.Component {
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  onSelect={this.changeAttribute(el.id)}
                 />
               ) : (
                 <ColorsOptionsPicker
@@ -70,7 +65,6 @@ class MainCartItem extends React.Component {
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
                   options={el.items}
-                  onSelect={this.changeAttribute(el.id)}
                 />
               );
             })}
