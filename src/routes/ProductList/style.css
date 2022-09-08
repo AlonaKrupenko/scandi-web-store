@@ -14,3 +14,6 @@
   grid-template-columns: repeat(auto-fit, 355px);
   grid-gap: 103px 40px;
 }
+.prosuct-card-link {
+  text-decoration: none;
+}

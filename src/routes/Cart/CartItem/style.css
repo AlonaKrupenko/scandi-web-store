@@ -48,3 +48,11 @@
   bottom: 16px;
   right: 16px;
 }
+
+.switch-btn-left {
+  margin-right: 8px;
+  cursor: pointer;
+}
+.switch-btn-right {
+  cursor: pointer;
+}

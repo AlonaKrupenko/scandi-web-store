@@ -91,7 +91,7 @@ class ProductList extends React.Component {
           {allProducts.map((el) => {
             return (
               <Link
-                style={{ textDecoration: "none" }}
+                className="prosuct-card-link"
                 to={`/${this.props.match.params.name}/${el.id}`}
                 key={el.id}
               >
@@ -100,10 +100,14 @@ class ProductList extends React.Component {
                   onAdd={this.addToCart}
                   img={el.gallery[0]}
                   name={el.name}
+                  brand={el.brand}
                   priceSymb={
                     getPrice(el, this.props.selectedCurrency).currency.symbol
                   }
-                  price={getPrice(el, this.props.selectedCurrency).amount}
+                  price={getPrice(
+                    el,
+                    this.props.selectedCurrency
+                  ).amount.toFixed(2)}
                   inStock={el.inStock}
                 />
               </Link>

@@ -7,16 +7,6 @@ import getPrice from "./../../helpers/getPrice";
 import getCartTotal from "./../../helpers/getCartTotal";
 
 class Cart extends React.Component {
-  onChangeAttribute = (cartItemId, attributeId, attributeValue) => {
-    this.props.dispatch(
-      cartSlice.actions.changeAttributes({
-        cartItemId: cartItemId,
-        attributeId: attributeId,
-        attributeValue: attributeValue,
-      })
-    );
-  };
-
   onChangeQuantity = (id, qnt) => {
     if (qnt) {
       this.props.dispatch(
@@ -33,9 +23,7 @@ class Cart extends React.Component {
   render() {
     return (
       <>
-        <h1 className="page-cart-title" style={{ marginTop: "80px" }}>
-          CART
-        </h1>
+        <h1 className="page-cart-title">CART</h1>
         {this.props.dataList.map((el) => {
           return (
             <MainCartItem
@@ -44,10 +32,12 @@ class Cart extends React.Component {
                 getPrice(el.product, this.props.selectedCurrency).currency
                   .symbol
               }
-              price={getPrice(el.product, this.props.selectedCurrency).amount}
+              price={getPrice(
+                el.product,
+                this.props.selectedCurrency
+              ).amount.toFixed(2)}
               key={el.id}
               onChangeQuantity={this.onChangeQuantity}
-              onChangeAttribute={this.onChangeAttribute}
             />
           );
         })}

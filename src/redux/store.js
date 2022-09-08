@@ -18,7 +18,11 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
-  devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+  devTools: process.env.NODE_ENV === "development",
 });
 
 persistStore(store);

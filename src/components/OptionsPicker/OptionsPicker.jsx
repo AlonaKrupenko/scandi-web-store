@@ -4,16 +4,21 @@ import cn from "classnames";
 
 class OptionsPicker extends React.Component {
   selectValue = (event) => {
-    this.props.onSelect(event.currentTarget.dataset.option);
+    if (this.props.onSelect) {
+      this.props.onSelect(event.currentTarget.dataset.option);
+    }
   };
 
   render() {
     const optionNameStyle = cn("option-name", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
     const optionBlockStyle = cn("option-block", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
+
     return (
       <div className={optionBlockStyle}>
         <p className={optionNameStyle}>{this.props.title}:</p>
@@ -22,14 +27,18 @@ class OptionsPicker extends React.Component {
             const itemStyle = cn("option-item", {
               "option-item-selected": this.props.value === el.value,
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
 
             const divItemStyle = cn("list-item-block", {
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
             const pItemStyle = cn("list-item-text", {
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
+
             return (
               <li
                 className={itemStyle}

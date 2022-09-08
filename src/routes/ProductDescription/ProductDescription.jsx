@@ -12,6 +12,7 @@ import { client } from "../../App";
 import getPrice from "./../../helpers/getPrice";
 import NotFound from "../NotFound/NotFound";
 import sanitizeHtml from "sanitize-html";
+import { ReactComponent as BtnRight } from "../../assets/cart_btn_right.svg";
 
 class ProductDescription extends React.Component {
   constructor(props) {
@@ -108,6 +109,13 @@ class ProductDescription extends React.Component {
       "not-available": !productData.inStock,
     });
 
+    const descriptionWrapperClasses = cn("description-img-overlay", {
+      "description-non-visible-wrapper": productData.inStock,
+    });
+    const descriptionWrapperTextClasses = cn("description-out-of-stock-text", {
+      "description-non-visible": productData.inStock,
+    });
+
     return (
       <div className="description-block">
         <div className="img-block">
@@ -124,6 +132,7 @@ class ProductDescription extends React.Component {
               );
             })}
           </div>
+
           <div className="description-img-wrapper">
             <img
               className="description-main-img"
@@ -134,6 +143,9 @@ class ProductDescription extends React.Component {
               }
               alt=""
             />
+            <div className={descriptionWrapperClasses}>
+              <p className={descriptionWrapperTextClasses}>OUT OF STOCK</p>
+            </div>
           </div>
         </div>
         <div className="description-content">
@@ -164,7 +176,9 @@ class ProductDescription extends React.Component {
           <p className="price">
             {getPrice(productData, this.props.selectedCurrency).currency
               .symbol +
-              getPrice(productData, this.props.selectedCurrency).amount}
+              getPrice(productData, this.props.selectedCurrency).amount.toFixed(
+                2
+              )}
           </p>
           <button
             className={btnClasses}
