@@ -34,7 +34,7 @@ class Header extends React.Component {
               <Cart className="cart-icon" />
 
               <div className="cart-indicator">
-                <p style={{ margin: "0" }}>{this.props.quantity}</p>
+                <p className="cart-indicator-text">{this.props.quantity}</p>
               </div>
 
               {this.state.isCartVisible ? (

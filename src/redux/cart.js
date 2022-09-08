@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import compareObjects from "../helpers/compareObjects";
 
 const initialState = {
   list: [],
@@ -9,11 +10,33 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
+      let updatedList = [];
+
+      const itemIndex = state.list.findIndex((el) => {
+        return compareObjects(
+          el.selectedAttributes,
+          action.payload.selectedAttributes
+        );
+      });
+      if (itemIndex !== -1) {
+        updatedList = [
+          ...state.list.slice(0, itemIndex),
+          {
+            ...state.list[itemIndex],
+            quantity: state.list[itemIndex].quantity + 1,
+          },
+          ...state.list.slice(itemIndex + 1),
+        ];
+      } else {
+        updatedList = [...state.list, action.payload];
+      }
+
       return {
         ...state,
-        list: [...state.list, action.payload],
+        list: updatedList,
       };
     },
+
     deleteItem: (state, action) => {
       const updatedArr = state.list.filter((el) => {
         return el.id !== action.payload;

@@ -25,6 +25,9 @@
   font-size: 24px;
   line-height: 28px;
 }
+.page-cart-title {
+  margin-top: 80px;
+}
 
 .page-cart-btn {
   width: 100%;

@@ -91,7 +91,7 @@ class ProductList extends React.Component {
           {allProducts.map((el) => {
             return (
               <Link
-                style={{ textDecoration: "none" }}
+                className="prosuct-card-link"
                 to={`/${this.props.match.params.name}/${el.id}`}
                 key={el.id}
               >

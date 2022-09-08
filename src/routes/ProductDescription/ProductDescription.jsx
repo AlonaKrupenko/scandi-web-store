@@ -180,7 +180,6 @@ class ProductDescription extends React.Component {
                 2
               )}
           </p>
-          {console.log(productData)}
           <button
             className={btnClasses}
             onClick={this.onAddToCart}

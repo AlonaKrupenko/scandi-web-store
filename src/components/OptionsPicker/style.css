@@ -79,6 +79,10 @@
   height: 16px;
   width: 16px;
   min-width: unset;
+  cursor: auto;
+}
+.list-item-block.color.main-cart {
+  cursor: auto;
 }
 
 .option-item.cart-popup {
@@ -86,10 +90,14 @@
 }
 .list-item-block.cart-popup {
   padding: 0 2px;
-  cursor: pointer;
+  cursor: auto;
   min-width: 24px;
   height: 24px;
 }
+.list-item-block.main-cart {
+  cursor: auto;
+}
+
 .list-item-text.cart-popup {
   font-size: 14px;
   line-height: 22px;

@@ -23,9 +23,7 @@ class Cart extends React.Component {
   render() {
     return (
       <>
-        <h1 className="page-cart-title" style={{ marginTop: "80px" }}>
-          CART
-        </h1>
+        <h1 className="page-cart-title">CART</h1>
         {this.props.dataList.map((el) => {
           return (
             <MainCartItem

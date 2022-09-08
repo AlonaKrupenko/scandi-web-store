@@ -54,6 +54,7 @@ class MainCartItem extends React.Component {
             {this.props.data.product.attributes.map((el) => {
               return el.id !== "Color" ? (
                 <OptionsPicker
+                  className="main-cart"
                   key={el.id}
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
@@ -61,6 +62,7 @@ class MainCartItem extends React.Component {
                 />
               ) : (
                 <ColorsOptionsPicker
+                  className="main-cart"
                   key={el.id}
                   value={this.props.data.selectedAttributes[el.id]}
                   title={el.id}
@@ -85,11 +87,11 @@ class MainCartItem extends React.Component {
             />
             <div className={switchBtnClass}>
               <BtnLeft
-                style={{ marginRight: "8px", cursor: "pointer" }}
+                className="switch-btn-left"
                 onClick={this.switchPhoto("previous")}
               />
               <BtnRight
-                style={{ cursor: "pointer" }}
+                className="switch-btn-right"
                 onClick={this.switchPhoto("next")}
               />
             </div>

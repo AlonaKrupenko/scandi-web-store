@@ -12,10 +12,15 @@ class ColorsOptionsPicker extends React.Component {
   render() {
     const optionNameStyle = cn("option-name", "color", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
     const optionBlockStyle = cn("option-block", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
+
+    console.log(optionNameStyle);
+
     return (
       <div className={optionBlockStyle}>
         <p className={optionNameStyle}>{this.props.title}:</p>
@@ -27,9 +32,10 @@ class ColorsOptionsPicker extends React.Component {
 
             const cororDivStyle = cn("list-item-block color", {
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
 
-            const divSyle = { backgroundColor: String(el.value) };
+            const divSyle = { backgroundColor: el.value };
 
             return (
               <li

@@ -22,7 +22,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-  devTools: true,
+  devTools: process.env.NODE_ENV === "development",
 });
 
 persistStore(store);

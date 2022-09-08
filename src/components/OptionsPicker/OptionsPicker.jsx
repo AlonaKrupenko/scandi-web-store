@@ -12,9 +12,11 @@ class OptionsPicker extends React.Component {
   render() {
     const optionNameStyle = cn("option-name", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
     const optionBlockStyle = cn("option-block", {
       "cart-popup": this.props.className === "cart-popup",
+      "main-cart": this.props.className === "main-cart",
     });
 
     return (
@@ -25,13 +27,16 @@ class OptionsPicker extends React.Component {
             const itemStyle = cn("option-item", {
               "option-item-selected": this.props.value === el.value,
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
 
             const divItemStyle = cn("list-item-block", {
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
             const pItemStyle = cn("list-item-text", {
               "cart-popup": this.props.className === "cart-popup",
+              "main-cart": this.props.className === "main-cart",
             });
 
             return (
